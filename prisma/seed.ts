@@ -1,0 +1,2 @@
+import {PrismaClient} from '@prisma/client'; const prisma=new PrismaClient();
+async function main(){const cats=['Tech','Audio','Footwear','Fashion','Outerwear','Lifestyle','Accessories','Home'];for(const name of cats)await prisma.category.upsert({where:{slug:name.toLowerCase()},update:{},create:{name,slug:name.toLowerCase()}});console.log('NOVA seed schema ready. Use the app local dataset for UI demo; this seed can be extended with catalog fixtures.')}main().finally(()=>prisma.$disconnect());

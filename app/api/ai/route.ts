@@ -1,0 +1,3 @@
+import {NextResponse} from 'next/server';import {z} from 'zod';import {products} from '@/lib/data';
+const schema=z.object({message:z.string().min(1).max(1000)});
+export async function POST(req:Request){const body=schema.parse(await req.json());if(!process.env.OPENAI_API_KEY)return NextResponse.json({answer:'NOVA AI demo mode: I can help you find products, compare options, and narrow choices. Connect OPENAI_API_KEY to enable live LLM responses.',products:products.slice(0,4)});return NextResponse.json({answer:'Live LLM adapter is enabled. Add your preferred OpenAI SDK call here using server-side credentials.',products:products.slice(0,4)})}
